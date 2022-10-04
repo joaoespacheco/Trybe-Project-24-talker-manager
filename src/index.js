@@ -5,7 +5,12 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 const app = express();
+
+const emailValidatorMiddleware = require('./middleware/emailValidatorMiddleware');
+const passwordValidatorMiddleware = require('./middleware/passwordValidatorMiddleware');
+
 app.use(bodyParser.json());
+app.use(emailValidatorMiddleware, passwordValidatorMiddleware);
 
 const HTTP_OK_STATUS = 200;
 const PORT = '3000';
@@ -32,14 +37,15 @@ app.get('/talker/:id', async (req, res) => {
   res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
 });
 
-app.post('/login', async (req, res) => {
-  const login = { ...req.body };
-  if (login.email && login.password) {
+app.post(
+  '/login',
+  emailValidatorMiddleware,
+  passwordValidatorMiddleware,
+  async (req, res) => {
     const token = crypto.randomBytes(8).toString('hex');
-    return res.status(200).json({ token });
-  }
-  res.status(400).json({ message: 'Falhou' });
-});
+    res.status(200).json({ token });
+},
+);
 
 app.listen(PORT, () => {
   console.log('Online');
