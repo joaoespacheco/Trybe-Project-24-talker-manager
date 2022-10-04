@@ -8,10 +8,15 @@ const app = express();
 
 const emailValidatorMiddleware = require('./middleware/emailValidatorMiddleware');
 const passwordValidatorMiddleware = require('./middleware/passwordValidatorMiddleware');
+const tokenValidatorMiddleware = require('./middleware/tokenValidatorMiddleware');
+const nameValidatorMiddleware = require('./middleware/nameValidatorMiddleware');
+const ageValidatorMiddleware = require('./middleware/ageValidatorMiddleware');
+const talkValidatorMiddleware = require('./middleware/talkValidatorMiddleware');
+
+const idGenerator = require('./Utils/idGenerator');
 
 app.use(bodyParser.json());
-app.use(emailValidatorMiddleware, passwordValidatorMiddleware);
-
+  
 const HTTP_OK_STATUS = 200;
 const PORT = '3000';
 
@@ -37,15 +42,28 @@ app.get('/talker/:id', async (req, res) => {
   res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
 });
 
-app.post(
-  '/login',
+app.post('/login',
   emailValidatorMiddleware,
   passwordValidatorMiddleware,
   async (req, res) => {
     const token = crypto.randomBytes(8).toString('hex');
     res.status(200).json({ token });
-},
-);
+});
+
+app.post('/talker',
+  tokenValidatorMiddleware,
+  nameValidatorMiddleware,
+  ageValidatorMiddleware,
+  talkValidatorMiddleware,
+  async (req, res) => {
+    const pathSpeakers = path.resolve(__dirname, 'talker.json');
+    const speakers = JSON.parse(await fs.readFile(pathSpeakers, 'utf8'));
+    const newId = idGenerator(speakers);
+    const speaker = { ...req.body, id: newId };
+    speakers.push(speaker);
+    await fs.writeFile(pathSpeakers, JSON.stringify(speakers));
+    res.status(201).json(speaker);
+});
 
 app.listen(PORT, () => {
   console.log('Online');
