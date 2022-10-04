@@ -14,10 +14,21 @@ app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
 
-app.get('/talker', async (req, res) => {
+app.get('/talker', async (_req, res) => {
   const pathSpeakers = path.resolve(__dirname, 'talker.json');
   const speakers = JSON.parse(await fs.readFile(pathSpeakers, 'utf8'));
   res.status(200).json(speakers);
+});
+
+app.get('/talker/:id', async (req, res) => {
+  const { id } = req.params;
+  const pathSpeakers = path.resolve(__dirname, 'talker.json');
+  const speakers = JSON.parse(await fs.readFile(pathSpeakers, 'utf8'));
+  const speaker = speakers.filter((person) => person.id === Number(id));
+  if (speaker.length) {
+    return res.status(200).json(speaker[0]);
+  }
+  res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
 });
 
 app.listen(PORT, () => {
