@@ -45,7 +45,7 @@ app.get('/talker/:id', async (req, res) => {
 app.post('/login',
   emailValidatorMiddleware,
   passwordValidatorMiddleware,
-  async (req, res) => {
+ (req, res) => {
     const token = crypto.randomBytes(8).toString('hex');
     res.status(200).json({ token });
 });
@@ -63,6 +63,23 @@ app.post('/talker',
     speakers.push(speaker);
     await fs.writeFile(pathSpeakers, JSON.stringify(speakers));
     res.status(201).json(speaker);
+});
+
+app.put('/talker/:id',
+  tokenValidatorMiddleware,
+  nameValidatorMiddleware,
+  ageValidatorMiddleware,
+  talkValidatorMiddleware,
+  async (req, res) => {
+    const { id } = req.params;
+    const pathSpeakers = path.resolve(__dirname, 'talker.json');
+    const speakers = JSON.parse(await fs.readFile(pathSpeakers, 'utf8'));
+    const speakersUnmodified = speakers.filter((speaker) => speaker.id !== Number(id));
+    console.log(speakersUnmodified.length);
+    const speakerModified = { ...req.body, id: Number(id) };
+    const currentSpeakers = [...speakersUnmodified, speakerModified];
+    await fs.writeFile(pathSpeakers, JSON.stringify(currentSpeakers));
+    res.status(200).json(speakerModified);
 });
 
 app.listen(PORT, () => {
