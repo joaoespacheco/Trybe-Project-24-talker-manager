@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+const pathSpeakers = path.resolve(__dirname, 'talker.json');
+
 const emailValidatorMiddleware = require('./middleware/emailValidatorMiddleware');
 const passwordValidatorMiddleware = require('./middleware/passwordValidatorMiddleware');
 const tokenValidatorMiddleware = require('./middleware/tokenValidatorMiddleware');
@@ -26,14 +28,13 @@ app.get('/', (_request, response) => {
 });
 
 app.get('/talker', async (_req, res) => {
-  const pathSpeakers = path.resolve(__dirname, 'talker.json');
   const speakers = JSON.parse(await fs.readFile(pathSpeakers, 'utf8'));
   res.status(200).json(speakers);
 });
 
 app.get('/talker/:id', async (req, res) => {
   const { id } = req.params;
-  const pathSpeakers = path.resolve(__dirname, 'talker.json');
+
   const speakers = JSON.parse(await fs.readFile(pathSpeakers, 'utf8'));
   const speaker = speakers.filter((person) => person.id === Number(id));
   if (speaker.length) {
@@ -56,7 +57,6 @@ app.post('/talker',
   ageValidatorMiddleware,
   talkValidatorMiddleware,
   async (req, res) => {
-    const pathSpeakers = path.resolve(__dirname, 'talker.json');
     const speakers = JSON.parse(await fs.readFile(pathSpeakers, 'utf8'));
     const newId = idGenerator(speakers);
     const speaker = { ...req.body, id: newId };
@@ -72,7 +72,6 @@ app.put('/talker/:id',
   talkValidatorMiddleware,
   async (req, res) => {
     const { id } = req.params;
-    const pathSpeakers = path.resolve(__dirname, 'talker.json');
     const speakers = JSON.parse(await fs.readFile(pathSpeakers, 'utf8'));
     const speakersUnmodified = speakers.filter((speaker) => speaker.id !== Number(id));
     console.log(speakersUnmodified.length);
@@ -80,6 +79,16 @@ app.put('/talker/:id',
     const currentSpeakers = [...speakersUnmodified, speakerModified];
     await fs.writeFile(pathSpeakers, JSON.stringify(currentSpeakers));
     res.status(200).json(speakerModified);
+});
+
+app.delete('/talker/:id',
+  tokenValidatorMiddleware,
+  async (req, res) => {
+    const { id } = req.params;
+    const speakers = JSON.parse(await fs.readFile(pathSpeakers, 'utf8'));
+    const speakersUnmodified = speakers.filter((speaker) => speaker.id !== Number(id));
+    await fs.writeFile(pathSpeakers, JSON.stringify(speakersUnmodified));
+    res.status(204).end();
 });
 
 app.listen(PORT, () => {
