@@ -32,9 +32,22 @@ app.get('/talker', async (_req, res) => {
   res.status(200).json(speakers);
 });
 
+app.get('/talker/search', 
+tokenValidatorMiddleware,
+async (req, res) => {
+  const { q } = req.query;
+  const speakers = JSON.parse(await fs.readFile(pathSpeakers, 'utf8'));
+  if (q === '') {
+    return res.status(200).json(speakers);
+  }
+  const filteredSpeakers = speakers.filter(
+    ({ name }) => name.toLowerCase().includes(q.toLowerCase()),
+);
+  res.status(200).json(filteredSpeakers);
+});
+
 app.get('/talker/:id', async (req, res) => {
   const { id } = req.params;
-
   const speakers = JSON.parse(await fs.readFile(pathSpeakers, 'utf8'));
   const speaker = speakers.filter((person) => person.id === Number(id));
   if (speaker.length) {
@@ -74,7 +87,6 @@ app.put('/talker/:id',
     const { id } = req.params;
     const speakers = JSON.parse(await fs.readFile(pathSpeakers, 'utf8'));
     const speakersUnmodified = speakers.filter((speaker) => speaker.id !== Number(id));
-    console.log(speakersUnmodified.length);
     const speakerModified = { ...req.body, id: Number(id) };
     const currentSpeakers = [...speakersUnmodified, speakerModified];
     await fs.writeFile(pathSpeakers, JSON.stringify(currentSpeakers));
