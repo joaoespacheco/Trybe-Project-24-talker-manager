@@ -62,54 +62,55 @@ Aprovado com 100% de desempenho em todos os requisitos
 ### Login:
 <details>
 <summary><strong>POST /login</strong></summary>
+ 
 Realiza o login na aplicação </br>
 > * Se bem-sucedido, retorna status 200 com um token aleatório de 16 caracteres
+
 </details>
-</br>
 
 ### Talker:
 <details>
 <summary><strong>GET /talker</strong></summary>
 
-Faz a requisição dos dados de todos os palestrantes cadastrados
-> * Se bem-sucedido, retorna o status 200 e um array com todas as pessoas palestrantes cadastradas.
+Realiza a requisição dos dados de todos os palestrantes cadastrados
+> * Se bem-sucedido, retorna status 200 e um array com todas as pessoas palestrantes cadastradas.
 
 </details>
 <details>
 <summary><strong>GET /talker/:id</strong></summary>
 
-Faz a requisição dos dados de um palestrante especifico
-> * Se bem-sucedido, retorna o status 200 e uma pessoa palestrante com base no id da rota
+Realiza a requisição dos dados de um palestrante especifico
+> * Se bem-sucedido, retorna status 200 e uma pessoa palestrante com base no id da rota
 
 </details>
 <details>
 <summary><strong>GET /talker/search?q=searchTerm</strong></summary>
 
-Faz a requisição dos dados dos palestrantes filtrados pelo termo de busca
+Realiza a requisição dos dados dos palestrantes filtrados pelo termo de busca
 > * Se bem-sucedido, retorna status 200 e um array de palestrantes que contenham em seu nome o termo pesquisado no queryParam da URL
-> * Se não for inserido um termo de busca, retorna status 200 e um array contendo todos os palestrantes
-> * Se o termo de busca não encontrar nínguem, retorna status 200 e um array vazio
+> * Se o termo de busca estiver vazio, retorna status 200 e um array contendo todos os palestrantes
+> * Se o termo de busca não encontrar um palestrante correspondente, retorna status 200 e um array vazio
 
 </details>
 <details>
 <summary><strong>POST /talker</strong></summary>
 
-Faz a adição de um palestrante ao banco de dados
-> * Se bem-sucedido, retorna o status 201 e a pessoa cadastrada
+Realiza a adição de um palestrante no banco de dados
+> * Se bem-sucedido, retorna status 201 e a pessoa cadastrada
 
 </details>
 <details>
 <summary><strong>PUT /talker/:id</strong></summary>
 
-Faz a edição dos dados de um palestrante cadastrado no banco de dados
-> * Se bem-sucedido, retorna o status 200 e a pessoa editada
+Realiza a edição dos dados de um palestrante cadastrado no banco de dados
+> * Se bem-sucedido, retorna status 200 e a pessoa editada
 
 </details>
 <details>
 <summary><strong>DELETE /talker/:id</strong></summary>
 
-Deleta um palestrante especifico cadastrado no banco de dados
-> * Se bem-sucedido, retorna o status 204, sem conteúdo na resposta
+Realiza a remoção de um palestrante especifico cadastrado no banco de dados
+> * Se bem-sucedido, retorna status 204, sem conteúdo na resposta
 
 </details>
 </br>
