@@ -120,7 +120,7 @@ Realiza a remoção de um palestrante especifico cadastrado no banco de dados
 * Criar uma API utilizando Express.js
 * Criar rotas http
 * Criar middlewares
-* Fazer validações das informações
+* Realizar validações das informações e tratamento das respostas
 </br>
 
 ## 🧰 Ferramentas:
