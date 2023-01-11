@@ -6,6 +6,11 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 const pathSpeakers = path.resolve(__dirname, 'talker.json');
 
 const emailValidatorMiddleware = require('./middleware/emailValidatorMiddleware');
@@ -18,7 +23,7 @@ const talkValidatorMiddleware = require('./middleware/talkValidatorMiddleware');
 const idGenerator = require('./Utils/idGenerator');
 
 app.use(bodyParser.json());
-  
+
 const HTTP_OK_STATUS = 200;
 const PORT = '3000';
 
@@ -70,6 +75,8 @@ app.post('/talker',
   ageValidatorMiddleware,
   talkValidatorMiddleware,
   async (req, res) => {
+    const { authorization } = req.headers;
+    console.log(authorization);
     const speakers = JSON.parse(await fs.readFile(pathSpeakers, 'utf8'));
     const newId = idGenerator(speakers);
     const speaker = { ...req.body, id: newId };

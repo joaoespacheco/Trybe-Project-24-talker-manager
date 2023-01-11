@@ -1,0 +1,411 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Talker Manager",
+    "description": "API para cadastro de palestrantes. Para acessar as rotas autenticadas, faça o login com qualquer email e senha de formato válido e receba o token de acesso.",
+    "contact": {
+      "email": "joaoe.pacheco@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/",
+      "description": "API de teste"
+    }
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "summary": "Realiza o login",
+        "description": "Rota responsável por realizar o login na aplicação.",
+        "tags": ["Login"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              },
+              "examples": {
+                "login": {
+                  "value": {
+                    "email": "email@email.com",
+                    "password": "123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Formato inválido ou campo obrigatório não inserido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Login realizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/talker": {
+      "get": {
+        "summary": "Lista todos os palestrantes",
+        "description": "Rota responsável por listar todos os palestrantes cadastrados",
+        "tags": ["Talker"],
+        "responses": {
+          "200": {
+            "description": "Palestrantes listados com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Talker"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Cadastra um novo palestrante",
+        "description": "Rota responsável por cadastrar um novo palestrante",
+        "tags": ["Talker"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/New-Talker"
+              },
+              "examples": {
+                "Cadastrar palestrante": {
+                  "value": {
+                    "name": "Danielle Santos",
+                    "age": 56,
+                    "talk": {
+                      "watchedAt": "22/10/2019",
+                      "rate": 5
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Formato inválido ou campo obrigatório não inserido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token inválido ou token não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Palestrante cadastrado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Talker"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/talker/{id}": {
+      "get": {
+        "summary": "Lista um palestrante através do ID",
+        "description": "Rota responsável por listar um palestrante através do seu ID",
+        "tags": ["Talker"],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "description": "ID do palestrante",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Palestrante listado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Talker"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Palestrante não encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Edita os dados de um palestrante através do ID",
+        "description": "Rota responsável por editar os dados de um palestrante através de seu ID",
+        "tags": ["Talker"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "description": "ID do palestrante",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/New-Talker"
+              },
+              "examples": {
+                "Editar palestrante": {
+                  "value": {
+                    "name": "Danielle Santos",
+                    "age": 56,
+                    "talk": {
+                      "watchedAt": "22/10/2019",
+                      "rate": 5
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Formato inválido ou campo obrigatório não inserido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token inválido ou token não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Palestrante editado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Talker"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deleta um palestrante através do ID",
+        "description": "Rota responsável por deletar um palestrante através do seu ID",
+        "tags": ["Talker"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "description": "ID do palestrante",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Token inválido ou token não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Palestrante deletado com sucesso"
+          }
+        }
+      }
+    },
+    "/talker/search": {
+      "get": {
+        "summary": "Busca palestrantes através do nome",
+        "description": "Rota responsável por buscar um ou mais palestrantes através do seu nome",
+        "tags": ["Talker"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Termo de busca"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Token inválido ou token não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Palestrantes listados com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Talker"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Login": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Token": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorMessage": {
+        "type": "object",
+        "properties": {
+          "message": { 
+            "type":"string" 
+          }
+        }
+      },
+      "Talker": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "number"
+          },
+          "id": {
+            "type": "number"
+          },
+          "talk": {
+            "type": "object",
+            "properties": {
+              "watchedAt": {
+                "type": "string"
+              },
+              "rate": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "New-Talker": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "number"
+          },
+          "talk": {
+            "type": "object",
+            "properties": {
+              "watchedAt": {
+                "type": "string"
+              },
+              "rate": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
