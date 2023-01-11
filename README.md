@@ -64,7 +64,7 @@ Aprovado com 100% de desempenho em todos os requisitos
 Com a aplicação em execução utilize a rota http://localhost:3000/api-docs para acessar a documentação e testar a API. Se preferir, utilize um cliente de requisições HTTP de sua preferência (Insomnia, Thunder Client, etc) para fazer as requisições.
 
 ### Acessando documentação online:
-Para acessar a documentação através de uma plataforma online sem a necessidade de executar localmente <strong> [clique aqui](https://swaggerviewer.ptr.red/spec/aHR0cHM6Ly9naXRodWIuY29tL2pvYW9lc3BhY2hlY28vVHJ5YmUtUHJvamVjdC0yNC10YWxrZXItbWFuYWdlci9yYXcvbWFpbi9zcmMvc3dhZ2dlci5qc29u) </strong>
+Para acessar a documentação através de uma plataforma online sem a necessidade de executar localmente <strong>[clique aqui](https://swaggerviewer.ptr.red/spec/aHR0cHM6Ly9naXRodWIuY29tL2pvYW9lc3BhY2hlY28vVHJ5YmUtUHJvamVjdC0yNC10YWxrZXItbWFuYWdlci9yYXcvbWFpbi9zcmMvc3dhZ2dlci5qc29u)</strong>.
       
 </br>
 
