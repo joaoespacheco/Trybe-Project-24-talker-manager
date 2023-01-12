@@ -106,8 +106,8 @@ A documentação referênte as rotas foi confeccionada utilizando a ferramenta S
 ### Acessando as informações das rotas localmente:
 Após iniciar a aplicação localmente utilize a rota http://localhost:3000/api-docs para acessar a documentação e testar a API. Se preferir, utilize um cliente de requisições HTTP de sua preferência (Insomnia, Thunder Client, etc) para fazer as requisições.
 
-### Acessando as informações das rotas online:
-Você pode acessar a documentação da rota de forma online <strong>[clicando aqui](https://swaggerviewer.ptr.red/spec/aHR0cHM6Ly9naXRodWIuY29tL2pvYW9lc3BhY2hlY28vVHJ5YmUtUHJvamVjdC0yNC10YWxrZXItbWFuYWdlci9yYXcvbWFpbi9zcmMvc3dhZ2dlci5qc29u)</strong>.
+### Acessando as informações das rotas através da plataforma swaggerviewer:
+Para acessar a documentação das rotas de forma online <strong>[clique aqui](https://swaggerviewer.ptr.red/spec/aHR0cHM6Ly9naXRodWIuY29tL2pvYW9lc3BhY2hlY28vVHJ5YmUtUHJvamVjdC0yNC10YWxrZXItbWFuYWdlci9yYXcvbWFpbi9zcmMvc3dhZ2dlci5qc29u)</strong>.
       
 </br>
 
