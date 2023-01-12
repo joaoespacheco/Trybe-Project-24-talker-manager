@@ -14,6 +14,9 @@ Os principais objetivos desse projeto foram:
 <details>
 <summary><strong>Desempenho</strong></summary>
 Aprovado com 100% de desempenho em todos os requisitos
+
+![image](https://user-images.githubusercontent.com/99846604/211950874-eb46e776-3726-4bcc-930b-5d325feba18f.png)
+
 </details>
 
 <details>
@@ -58,13 +61,53 @@ Aprovado com 100% de desempenho em todos os requisitos
 </details>
 </br>
 
-## 📑 Documentação:
+## ⚙️ Execução
 
-### Acessando documentação com aplicação rodando localmente:
-Com a aplicação em execução utilize a rota http://localhost:3000/api-docs para acessar a documentação e testar a API. Se preferir, utilize um cliente de requisições HTTP de sua preferência (Insomnia, Thunder Client, etc) para fazer as requisições.
+Para executar a aplicação inicie realizando o clone deste repositório com o comando abaixo.
 
-### Acessando documentação online:
-Para acessar a documentação através de uma plataforma online sem a necessidade de executar localmente <strong>[clique aqui](https://swaggerviewer.ptr.red/spec/aHR0cHM6Ly9naXRodWIuY29tL2pvYW9lc3BhY2hlY28vVHJ5YmUtUHJvamVjdC0yNC10YWxrZXItbWFuYWdlci9yYXcvbWFpbi9zcmMvc3dhZ2dlci5qc29u)</strong>.
+      git clone git@github.com:joaoespacheco/Trybe-Project-24-talker-manager.git
+
+Navegue até a raíz do projeto.
+
+      cd Trybe-Project-24-talker-manager/
+      
+Uma vez na raiz do projeto, execute o comando abaixo para instalar as dependências do projeto.
+    
+    npm install
+<br/>
+
+<details>
+   <summary><strong>Rodando a aplicação com o Docker</strong></summary>
+  </br>
+
+   Na pasta app do projeto, suba o container <strong>talker_manager</strong> utilizando o docker-compose.yml. Utilize o comando abaixo.
+
+        docker-compose up -d
+
+   Entre no terminal do container
+
+        docker exec -it talker_manager bash
+
+   Caso não tenha instalado anteriormente, uma vez no terminal do container, execute o comando abaixo para instalar as dependências do projeto.
+
+        npm install
+
+   Inicie o servidor
+
+        npm run dev
+        
+</details>
+</br>
+
+## ↪️ Rotas:
+
+A documentação referênte as rotas foi confeccionada utilizando a ferramenta Swagger/OpenAPI e pode ser visualizada de duas maneiras:
+
+### Acessando as informações das rotas localmente:
+Após iniciar a aplicação localmente utilize a rota http://localhost:3000/api-docs para acessar a documentação e testar a API. Se preferir, utilize um cliente de requisições HTTP de sua preferência (Insomnia, Thunder Client, etc) para fazer as requisições.
+
+### Acessando as informações das rotas online:
+Você pode acessar a documentação da rota de forma online <strong>[clicando aqui](https://swaggerviewer.ptr.red/spec/aHR0cHM6Ly9naXRodWIuY29tL2pvYW9lc3BhY2hlY28vVHJ5YmUtUHJvamVjdC0yNC10YWxrZXItbWFuYWdlci9yYXcvbWFpbi9zcmMvc3dhZ2dlci5qc29u)</strong>.
       
 </br>
 
