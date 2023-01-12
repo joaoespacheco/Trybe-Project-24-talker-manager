@@ -101,13 +101,15 @@ Uma vez na raiz do projeto, execute o comando abaixo para instalar as dependênc
 
 ## ↪️ Rotas:
 
-A documentação referênte as rotas foi confeccionada utilizando a ferramenta Swagger/OpenAPI e pode ser visualizada de duas maneiras:
+A documentação referente as rotas foi confeccionada utilizando a ferramenta Swagger/OpenAPI e pode ser visualizada de duas maneiras:
 
 ### Acessando as informações das rotas localmente:
-Após iniciar a aplicação localmente utilize a rota http://localhost:3000/api-docs para acessar a documentação e testar a API. Se preferir, utilize um cliente de requisições HTTP de sua preferência (Insomnia, Thunder Client, etc) para fazer as requisições.
+A documentação das rotas pode ser acessada após iniciar a aplicação localmente de acordo com as instruções da seção anterior chamada "Execução". </br> 
+</br>
+Para visualizar as rotas e testar as requisições você pode utilizar a rota http://localhost:3000/api-docs. Caso preferir, você também pode utilizar um cliente de requisições HTTP de sua preferência (Insomnia, Thunder Client, etc) para realizar os testes.
 
-### Acessando as informações das rotas através da plataforma swaggerviewer:
-Para acessar a documentação das rotas de forma online <strong>[clique aqui](https://swaggerviewer.ptr.red/spec/aHR0cHM6Ly9naXRodWIuY29tL2pvYW9lc3BhY2hlY28vVHJ5YmUtUHJvamVjdC0yNC10YWxrZXItbWFuYWdlci9yYXcvbWFpbi9zcmMvc3dhZ2dlci5qc29u)</strong>.
+### Acessando as informações das rotas online:
+Para visualizar as rotas e testar as requisições você pode utilizar a plataforma Swagger Viewer <strong>[clicando aqui](https://swaggerviewer.ptr.red/spec/aHR0cHM6Ly9naXRodWIuY29tL2pvYW9lc3BhY2hlY28vVHJ5YmUtUHJvamVjdC0yNC10YWxrZXItbWFuYWdlci9yYXcvbWFpbi9zcmMvc3dhZ2dlci5qc29u)</strong>.
       
 </br>
 
