@@ -126,6 +126,7 @@ Para visualizar as rotas você pode utilizar a plataforma Swagger Viewer <strong
 * Node.js
   * Express.js
 * Docker
+* Swagger
 </br>
 
 ## 📝 Desenvolvido por:
