@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Talker Manager",
-    "description": "API para cadastro de palestrantes. Para acessar as rotas autenticadas, faça o login com qualquer email e senha de formato válido e receba o token de acesso.",
+    "description": "API para gerenciamento de palestrantes e apresentações. Para acessar as rotas autenticadas, faça o login com qualquer email e senha de formato válido e receba o token de acesso.",
     "contact": {
       "email": "joaoe.pacheco@gmail.com"
     },
